@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao{
+public class CustomerDaoImpl implements CustomerDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -20,10 +20,21 @@ public class CustomerDaoImpl implements CustomerDao{
         Session session = sessionFactory.getCurrentSession();
 
         Query<Customer> query =
-                session.createQuery("from Customer", Customer.class);
+                session.createQuery("from Customer order by lastName", Customer.class);
 
-        List<Customer> customers = query.getResultList();
+        return query.getResultList();
+    }
 
-        return customers;
+    @Override
+    public void saveCustomer(Customer customer) {
+        Session session = sessionFactory.getCurrentSession();
+
+        session.saveOrUpdate(customer);
+
+    }
+
+    @Override
+    public Customer getCustomer(int id) {
+        return sessionFactory.getCurrentSession().get(Customer.class, id);
     }
 }
