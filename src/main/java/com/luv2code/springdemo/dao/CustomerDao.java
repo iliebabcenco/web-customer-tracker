@@ -16,4 +16,6 @@ public interface CustomerDao {
     void deleteCustomer(int id);
 
     List<Customer> searchCustomers(String keyword);
+
+    List<Customer> getSortedCustomers(String sortKey);
 }

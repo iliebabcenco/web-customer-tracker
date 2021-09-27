@@ -54,4 +54,14 @@ public class CustomerDaoImpl implements CustomerDao {
         query.setParameter("keyword", "%"+keyword.toLowerCase()+"%");
         return query.getResultList();
     }
+
+    @Override
+    public List<Customer> getSortedCustomers(String sortKey) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from Customer order by "+sortKey);
+//        query.setParameter("sortKey", sortKey);
+        return query.getResultList();
+    }
 }

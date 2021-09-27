@@ -19,9 +19,16 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/list")
-    public String listCustomers(Model model) {
-
-        model.addAttribute("customers", customerService.getCustomers());
+    public String listCustomers(@RequestParam(value = "sortKey", required = false) String sortKey,
+                                Model model) {
+        List<Customer> customers;
+        if (sortKey == null) {
+            customers = customerService.getCustomers();
+        } else {
+            customers = customerService.getSortedCustomers(sortKey);
+        }
+        System.out.println("\n\n\n"+customers+"\n\n\n");
+        model.addAttribute("customers", customers);
 
         return "list-customers";
     }

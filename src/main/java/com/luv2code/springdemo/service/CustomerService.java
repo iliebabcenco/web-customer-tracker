@@ -16,4 +16,6 @@ public interface CustomerService {
     void deleteCustomer(int id);
 
     List<Customer> searchCustomers(String keyword);
+
+    List<Customer> getSortedCustomers(String sortKey);
 }

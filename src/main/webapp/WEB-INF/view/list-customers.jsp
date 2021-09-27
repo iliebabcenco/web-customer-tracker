@@ -25,10 +25,19 @@
         </form:form>
         <hr>
         <table>
+            <c:url var="sortByFirstName" value="/customers/list">
+                <c:param name="sortKey" value="firstName" />
+            </c:url>
+            <c:url var="sortByLastName" value="/customers/list">
+                <c:param name="sortKey" value="lastName"/>
+            </c:url>
+            <c:url var="sortByEmail" value="/customers/list">
+                <c:param name="sortKey" value="email"/>
+            </c:url>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
+                <th><a href="${sortByFirstName}">First Name</a></th>
+                <th><a href="${sortByLastName}">Last Name</a></th>
+                <th><a href="${sortByEmail}">Email</a></th>
                 <th>Action</th>
             </tr>
 
@@ -39,6 +48,9 @@
                 <c:url var="delete" value="/customers/delete">
                     <c:param name="customerId" value="${customer.id}"/>
                 </c:url>
+
+
+
                 <tr>
                     <td>${customer.firstName}</td>
                     <td>${customer.lastName}</td>
