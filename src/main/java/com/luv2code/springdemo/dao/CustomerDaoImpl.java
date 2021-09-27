@@ -45,4 +45,13 @@ public class CustomerDaoImpl implements CustomerDao {
         query.setParameter("id", id);
         query.executeUpdate();
     }
+
+    @Override
+    public List<Customer> searchCustomers(String keyword) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from Customer where lower(firstName) like :keyword or lower(lastName) like :keyword");
+        query.setParameter("keyword", "%"+keyword.toLowerCase()+"%");
+        return query.getResultList();
+    }
 }

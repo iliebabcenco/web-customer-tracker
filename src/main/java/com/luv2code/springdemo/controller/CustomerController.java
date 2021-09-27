@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
@@ -56,6 +59,14 @@ public class CustomerController {
 
 
         return "redirect:/customers/list";
+    }
+
+    @GetMapping("/search")
+    public String searchForCustomers(@RequestParam("searchKeyword") String keyword,
+                                     Model model) {
+        List<Customer> customers = customerService.searchCustomers(keyword);
+        model.addAttribute("customers", customers);
+        return "list-customers";
     }
 
 }
